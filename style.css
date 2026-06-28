@@ -4,90 +4,156 @@
     box-sizing: border-box;
 }
 
-body {
-    font-family: "Inter", sans-serif;
-    background: #05070b;
-    overflow: hidden;
-    height: 100vh;
+:root {
+    --bg: #05070b;
+    --accent: rgba(88, 166, 255, 0.35);
+    --text: #ffffff;
 }
 
-/* Center content */
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background: var(--bg);
+    font-family: "Inter", sans-serif;
+    overflow: hidden;
+}
+
+/* Particles */
+#particles {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+}
+
+/* Background */
+.background {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+
+    background:
+        radial-gradient(circle at center,
+        rgba(88,166,255,0.12),
+        transparent 35%),
+        #05070b;
+
+    animation: pulse 8s ease-in-out infinite;
+}
+
+/* Noise */
+.noise {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.03;
+    z-index: 4;
+
+    background-image:
+        repeating-radial-gradient(circle at 0 0, transparent 0, white 1px, transparent 2px);
+}
+
+/* Glow */
+.mouse-glow {
+    position: fixed;
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    pointer-events: none;
+
+    background: radial-gradient(
+        circle,
+        rgba(88,166,255,0.18) 0%,
+        rgba(88,166,255,0.06) 35%,
+        transparent 70%
+    );
+
+    filter: blur(90px);
+    z-index: 2;
+    left: -350px;
+    top: -350px;
+}
+
+/* Center */
 .hero {
+    position: relative;
+    z-index: 3;
+
     width: 100%;
     height: 100vh;
 
     display: flex;
     justify-content: center;
     align-items: center;
-
-    position: relative;
-    z-index: 2;
 }
 
-/* Background glow */
-.background {
-    position: fixed;
-    inset: 0;
-
-    background:
-        radial-gradient(circle at center, rgba(88, 166, 255, 0.14), transparent 35%),
-        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.03), transparent 60%),
-        #05070b;
-
-    animation: pulse 6s ease-in-out infinite;
-}
-
-/* Nickname */
+/* Nick */
 .nickname {
+    position: relative;
     font-size: clamp(3rem, 8vw, 8rem);
     font-weight: 800;
-    letter-spacing: -0.04em;
-    color: #ffffff;
+    color: var(--text);
+    letter-spacing: -0.05em;
+    cursor: default;
 
     text-shadow:
         0 0 10px rgba(88,166,255,0.15),
         0 0 30px rgba(88,166,255,0.08);
 
-    transition: 0.4s ease;
-    cursor: default;
+    transition: transform 0.3s ease;
 }
 
 .nickname:hover {
-    text-shadow:
-        0 0 20px rgba(88,166,255,0.35),
-        0 0 50px rgba(88,166,255,0.20);
+    transform: scale(1.03);
 }
 
-/* Animation */
+/* Glitch */
+.nickname::before,
+.nickname::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+}
+
+.nickname:hover::before {
+    color: rgba(88,166,255,0.6);
+    transform: translate(3px, 0);
+    opacity: 1;
+}
+
+.nickname:hover::after {
+    color: rgba(255,255,255,0.4);
+    transform: translate(-3px, 0);
+    opacity: 1;
+}
+
 @keyframes pulse {
     0%, 100% {
         transform: scale(1);
         opacity: 1;
     }
-
     50% {
-        transform: scale(1.05);
+        transform: scale(1.04);
         opacity: 0.85;
     }
 }
-.mouse-glow {
-    position: fixed;
-    width: 500px;
-    height: 500px;
 
-    border-radius: 50%;
-    pointer-events: none;
+/* Mobile */
+@media (max-width: 768px) {
+    .nickname {
+        font-size: clamp(2rem, 10vw, 4rem);
+        padding: 0 20px;
+        text-align: center;
+        word-break: break-word;
+    }
 
-    background: radial-gradient(
-        circle,
-        rgba(88, 166, 255, 0.16) 0%,
-        rgba(88, 166, 255, 0.06) 35%,
-        transparent 70%
-    );
-
-    filter: blur(40px);
-    z-index: 1;
-
-    left: -250px;
-    top: -250px;
+    .mouse-glow {
+        width: 350px;
+        height: 350px;
+        left: -175px;
+        top: -175px;
+    }
 }
