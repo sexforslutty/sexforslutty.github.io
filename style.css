@@ -22,76 +22,55 @@ body {
     overflow: hidden;
 }
 
-/* Particles */
 #particles {
     position: fixed;
     inset: 0;
     z-index: 0;
 }
 
-/* Background */
 .background {
     position: fixed;
     inset: 0;
     z-index: 1;
-
     background:
-        radial-gradient(
-            circle at center,
-            rgba(88, 166, 255, 0.12),
-            transparent 35%
-        ),
+        radial-gradient(circle at center, rgba(88,166,255,0.12), transparent 35%),
         #05070b;
-
     animation: pulse 8s ease-in-out infinite;
 }
 
-/* Noise */
 .noise {
     position: fixed;
     inset: 0;
     pointer-events: none;
     opacity: 0.03;
     z-index: 4;
-
     background-image:
-        repeating-radial-gradient(
-            circle at 0 0,
-            transparent 0,
-            white 1px,
-            transparent 2px
-        );
+        repeating-radial-gradient(circle at 0 0, transparent 0, white 1px, transparent 2px);
 }
 
-/* Glow (Safari-safe, без blur) */
 .mouse-glow {
     position: fixed;
     width: 700px;
     height: 700px;
     border-radius: 50%;
     pointer-events: none;
-
     background: radial-gradient(
         circle,
-        rgba(88, 166, 255, 0.18) 0%,
-        rgba(88, 166, 255, 0.06) 35%,
+        rgba(88,166,255,0.18) 0%,
+        rgba(88,166,255,0.06) 35%,
         transparent 70%
     );
-
     z-index: 2;
     left: -350px;
     top: -350px;
-
     opacity: 0.8;
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0,0,0);
     will-change: transform;
 }
 
-/* Center */
 .hero {
     position: relative;
     z-index: 10;
-
     width: 100%;
     min-height: 100vh;
     min-height: 100dvh;
@@ -99,9 +78,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    perspective: 1000px;
 }
 
-/* Nick */
 .nickname {
     position: relative;
     z-index: 11;
@@ -114,19 +94,25 @@ body {
     opacity: 1;
 
     text-shadow:
-        0 0 10px rgba(88, 166, 255, 0.15),
-        0 0 30px rgba(88, 166, 255, 0.08);
+        0 0 10px rgba(88,166,255,0.15),
+        0 0 30px rgba(88,166,255,0.08);
 
-    transition: transform 0.3s ease;
+    transition:
+        transform 0.15s ease-out,
+        text-shadow 0.2s ease-out;
 
     animation: fadeIn 1.5s ease forwards;
+
+    transform-style: preserve-3d;
+    will-change: transform;
 }
 
 .nickname:hover {
-    transform: scale(1.03);
+    text-shadow:
+        0 0 20px rgba(88,166,255,0.28),
+        0 0 45px rgba(88,166,255,0.14);
 }
 
-/* Glitch */
 .nickname::before,
 .nickname::after {
     content: attr(data-text);
@@ -136,24 +122,22 @@ body {
 }
 
 .nickname:hover::before {
-    color: rgba(88, 166, 255, 0.6);
+    color: rgba(88,166,255,0.6);
     transform: translate(3px, 0);
     opacity: 1;
 }
 
 .nickname:hover::after {
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255,255,255,0.4);
     transform: translate(-3px, 0);
     opacity: 1;
 }
 
-/* Animations */
 @keyframes pulse {
     0%, 100% {
         transform: scale(1);
         opacity: 1;
     }
-
     50% {
         transform: scale(1.04);
         opacity: 0.85;
@@ -165,14 +149,12 @@ body {
         opacity: 0;
         transform: translateY(25px) scale(0.96);
     }
-
     to {
         opacity: 1;
         transform: translateY(0) scale(1);
     }
 }
 
-/* Mobile */
 @media (max-width: 768px) {
     .nickname {
         font-size: clamp(2rem, 10vw, 4rem);
@@ -193,7 +175,6 @@ body {
     }
 }
 
-/* iOS Safari fallback */
 @supports (-webkit-touch-callout: none) {
     .mouse-glow {
         display: none;
