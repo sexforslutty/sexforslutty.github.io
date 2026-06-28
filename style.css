@@ -10,8 +10,7 @@
     --text: #ffffff;
 }
 
-html,
-body {
+html, body {
     width: 100%;
     height: 100%;
 }
@@ -79,7 +78,7 @@ body {
     justify-content: center;
     align-items: center;
 
-    perspective: 1000px;
+    perspective: 1200px;
 }
 
 .nickname {
@@ -98,7 +97,7 @@ body {
         0 0 30px rgba(88,166,255,0.08);
 
     transition:
-        transform 0.15s ease-out,
+        transform 0.12s ease-out,
         text-shadow 0.2s ease-out;
 
     animation: fadeIn 1.5s ease forwards;
@@ -109,8 +108,8 @@ body {
 
 .nickname:hover {
     text-shadow:
-        0 0 20px rgba(88,166,255,0.28),
-        0 0 45px rgba(88,166,255,0.14);
+        0 0 30px rgba(88,166,255,0.4),
+        0 0 60px rgba(88,166,255,0.18);
 }
 
 .nickname::before,
@@ -123,13 +122,13 @@ body {
 
 .nickname:hover::before {
     color: rgba(88,166,255,0.6);
-    transform: translate(3px, 0);
+    transform: translate(4px, 0);
     opacity: 1;
 }
 
 .nickname:hover::after {
     color: rgba(255,255,255,0.4);
-    transform: translate(-3px, 0);
+    transform: translate(-4px, 0);
     opacity: 1;
 }
 
@@ -147,11 +146,9 @@ body {
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(25px) scale(0.96);
     }
     to {
         opacity: 1;
-        transform: translateY(0) scale(1);
     }
 }
 
@@ -168,10 +165,6 @@ body {
         height: 350px;
         left: -175px;
         top: -175px;
-    }
-
-    .hero {
-        min-height: 100dvh;
     }
 }
 
