@@ -1,0 +1,72 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background: #05070b;
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* Center content */
+.hero {
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    z-index: 2;
+}
+
+/* Background glow */
+.background {
+    position: fixed;
+    inset: 0;
+
+    background:
+        radial-gradient(circle at center, rgba(88, 166, 255, 0.14), transparent 35%),
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.03), transparent 60%),
+        #05070b;
+
+    animation: pulse 6s ease-in-out infinite;
+}
+
+/* Nickname */
+.nickname {
+    font-size: clamp(3rem, 8vw, 8rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: #ffffff;
+
+    text-shadow:
+        0 0 10px rgba(88,166,255,0.15),
+        0 0 30px rgba(88,166,255,0.08);
+
+    transition: 0.4s ease;
+    cursor: default;
+}
+
+.nickname:hover {
+    text-shadow:
+        0 0 20px rgba(88,166,255,0.35),
+        0 0 50px rgba(88,166,255,0.20);
+}
+
+/* Animation */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 0.85;
+    }
+}
